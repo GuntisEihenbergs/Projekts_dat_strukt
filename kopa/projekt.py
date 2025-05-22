@@ -16,8 +16,8 @@ if aktīvs.status_code == 200:
 else:
     print("Kļūda: ", aktīvs.status_code)
 wb = load_workbook('kopa/Book5.xlsx')
-ws=wb["Sheet1"]
-wb.remove(ws)
+if "Sheet1" in wb.sheetnames:
+    wb.remove(wb["Sheet1"])
 if 'First' in wb.sheetnames:
     ws = wb['First']
 else:
@@ -28,6 +28,6 @@ for x,(one,two) in enumerate(both,start=1):
     oldp = float(one.replace('€','').replace(',','.'))
     newp = float(two.replace('€','').replace(',','.'))
     izm = oldp-newp
-    ws[f'C{x}']=f"{izm:.2f}".replace('.',',')+'€'
+    ws[f'C{x}']='€'+f"{izm:.2f}".replace('.',',')
 wb.save('kopa/Book5.xlsx')
 wb.close()
